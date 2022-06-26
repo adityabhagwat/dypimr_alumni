@@ -1,0 +1,91 @@
+{
+  "project_info": {
+    "project_number": "280873140683",
+    "firebase_url": "https://aluminiapp-25666-default-rtdb.firebaseio.com",
+    "project_id": "aluminiapp-25666",
+    "storage_bucket": "aluminiapp-25666.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280873140683:android:5508850d5c073dcf0af64e",
+        "android_client_info": {
+          "package_name": "com.DYPIMR.dypimr_alumni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280873140683-us23m3clr3i9jboj2rdevuev6pbooi1l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA047jyGxtZNiS_yKIMojRWz4jGDqdqsws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280873140683-us23m3clr3i9jboj2rdevuev6pbooi1l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "280873140683-i2sfobuht66lprp0flsm9jia6jg3ilb8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.alumniapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:280873140683:android:0ade1230debc9e800af64e",
+        "android_client_info": {
+          "package_name": "com.example.alumni_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "280873140683-jvq8jt75lsj15ut0g29pu5kvs9p903o1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.alumni_app",
+            "certificate_hash": "7718d850a131cd01079668f9b35fa5f10ab1ede1"
+          }
+        },
+        {
+          "client_id": "280873140683-us23m3clr3i9jboj2rdevuev6pbooi1l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA047jyGxtZNiS_yKIMojRWz4jGDqdqsws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "280873140683-us23m3clr3i9jboj2rdevuev6pbooi1l.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "280873140683-i2sfobuht66lprp0flsm9jia6jg3ilb8.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.alumniapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
