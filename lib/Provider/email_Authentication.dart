@@ -29,6 +29,14 @@ class AuthenticationService {
     }
   }
 
+  Future<dynamic> forgotPassword(String email) async {
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    } on FirebaseException catch (e) {
+      return e.message;
+    }
+  }
+
   Future<dynamic> signUp(
       String email,
       String password,
@@ -37,14 +45,15 @@ class AuthenticationService {
       String gender,
       String branch,
       int passingYear,
-      String approvedProfileStatus) async {
+      String approvedProfileStatus,
+      String userType) async {
     try {
       UserCredential result = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       User user = result.user!;
       // create a new document for the user with the uid
-      await DatabaseService(uid: user.uid).updateUserData(
-          name, email, dob, gender, branch, passingYear, approvedProfileStatus);
+      await DatabaseService(uid: user.uid).updateUserData(name, email, dob,
+          gender, branch, passingYear, approvedProfileStatus, userType);
       return _userFromFirebaseUser(user);
     } on FirebaseAuthException catch (e) {
       return e.message;

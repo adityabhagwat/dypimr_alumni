@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:dypimr_alumni/Provider/email_Authentication.dart';
+import 'package:dypimr_alumni/forgotPassword.dart';
 import 'package:dypimr_alumni/registration_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -65,34 +66,6 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                       Container(
                         padding: EdgeInsets.all(10),
-                        child: DropdownButtonFormField(
-                          items: users.map((String user) {
-                            return DropdownMenuItem(
-                              value: user,
-                              child: Text(user),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              user = newValue!;
-                            });
-                          },
-                          value: user,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5.0)),
-                            ),
-                            labelText: 'Select User',
-                            icon: Icon(
-                              Icons.person,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        padding: EdgeInsets.all(10),
                         child: TextFormField(
                           validator: (val) =>
                               val!.isEmpty ? 'Enter an email' : null,
@@ -146,7 +119,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ), //textfields
               TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ForgotPassword()));
+                  },
                   child: const Text(
                     'Forgot Password ?',
                     style: TextStyle(

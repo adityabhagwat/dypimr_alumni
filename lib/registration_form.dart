@@ -28,6 +28,7 @@ class _Registration_FormState extends State<Registration_Form> {
   String user = 'Admin';
   String branch = 'MBA';
   String gender = 'Male';
+  String userType = 'Alumni';
   String approvedProfileStatus = 'Not Approved Yet';
   var passingYear = 1996;
   var users = ['Admin', 'Alumni', 'Faculty', 'Placement Officer'];
@@ -332,12 +333,42 @@ class _Registration_FormState extends State<Registration_Form> {
                               gender,
                               branch,
                               passingYear,
-                              approvedProfileStatus);
+                              approvedProfileStatus,
+                              userType);
                       if (result == null) {
                         setState(() {
                           loading = false;
-                          error = 'Could not sign in with those credentials';
+                          error = 'Could not Register with those credentials';
                         });
+                      } else {
+                        await showDialog<String>(
+                            context: context,
+                            builder: (BuildContext context) => AlertDialog(
+                                  title: const Text(
+                                    'DYPIMR ALUMNI',
+                                    style: TextStyle(
+                                      color: Colors.lightBlue,
+                                    ),
+                                  ),
+                                  content: const Text(
+                                    'You Are Registered to DYPIMR ALUMNI \n Happy Journey with Us !',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  actions: <Widget>[
+                                    TextButton(
+                                        onPressed: () {
+                                          return Navigator.pop(context, 'OK');
+                                        },
+                                        child: const Text('OK')),
+                                  ],
+                                ));
+
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()));
                       }
                     }
                   },

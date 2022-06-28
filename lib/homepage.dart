@@ -1,4 +1,4 @@
-import 'package:dypimr_alumni/Alumni/Alumni_Home.dart';
+import 'package:dypimr_alumni/UserHome.dart';
 import 'package:dypimr_alumni/login_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,7 @@ class _HomePageState extends State<HomePage> {
               child: Text('Something Went Wrong'),
             );
           } else if (snapshot.hasData) {
-            return AlumniHome();
+            return UserHome();
           } else {
             return LoginPage();
           }

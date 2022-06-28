@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dypimr_alumni/Admin/admin_side_nav.dart';
+import 'package:dypimr_alumni/Alumni/alumni_side_nav.dart';
 import 'package:dypimr_alumni/Provider/email_Authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -16,8 +16,7 @@ class AlumniHome extends StatefulWidget {
 class _AlumniHomeState extends State<AlumniHome> {
   @override
   Widget build(BuildContext context) {
-    var _firebaseFirestore =
-        FirebaseFirestore.instance.collection('Alumni_Details');
+    var _firebaseFirestore = FirebaseFirestore.instance.collection('Users');
     User user = FirebaseAuth.instance.currentUser!;
     String uid = user.uid;
     String approvedProfileStatus = "";
