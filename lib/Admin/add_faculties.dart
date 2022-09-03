@@ -6,14 +6,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class Registration_Form extends StatefulWidget {
-  const Registration_Form({Key? key}) : super(key: key);
+class AddFaculty extends StatefulWidget {
+  const AddFaculty({Key? key}) : super(key: key);
 
   @override
-  _Registration_FormState createState() => _Registration_FormState();
+  _AddFacultyState createState() => _AddFacultyState();
 }
 
-class _Registration_FormState extends State<Registration_Form> {
+class _AddFacultyState extends State<AddFaculty> {
   final _formKey = GlobalKey<FormState>();
   String error = '';
   bool loading = false;
@@ -23,42 +23,13 @@ class _Registration_FormState extends State<Registration_Form> {
   TextEditingController dobController = TextEditingController();
   TextEditingController genderController = TextEditingController();
   TextEditingController branchController = TextEditingController();
-  TextEditingController passingYearController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   String user = 'Admin';
   String branch = 'MBA';
   String gender = 'Male';
-  String userType = 'Alumni';
-  String approvedProfileStatus = 'Not Approved Yet';
-  var batch = "1996-1999";
-  var users = ['Admin', 'Alumni', 'Faculty', 'Placement Officer'];
+  String userType = 'Faculty';
   var branches = ['MBA', 'MCA'];
   var genders = ['Male', 'Female', 'Other'];
-  var batches = [
-    "1996-1999",
-    "1997-2000",
-    "1998-2001",
-    "1999-2002",
-    "2000-2003",
-    "2001-2004",
-    "2002-2005",
-    "2003-2006",
-    "2004-2007",
-    "2005-2008",
-    "2006-2009",
-    "2007-2010",
-    "2008-2011",
-    "2009-2012",
-    "2010-2013",
-    "2011-2014",
-    "2012-2015",
-    "2013-2016",
-    "2014-2017",
-    "2015-2018",
-    "2016-2019",
-    "2017-2020",
-    "2018-2021",
-  ];
 
   DateTime selectedDate = DateTime.now();
 
@@ -68,7 +39,6 @@ class _Registration_FormState extends State<Registration_Form> {
         initialDate: selectedDate,
         firstDate: DateTime(1900, 1),
         lastDate: DateTime(2101));
-
     if (picked != null && picked != selectedDate) {
       setState(() {
         selectedDate = picked;
@@ -81,9 +51,17 @@ class _Registration_FormState extends State<Registration_Form> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Alumni Registration'),
+        title: Text('Faculty Registration'),
         elevation: 0,
         backgroundColor: Color(0xFF800000),
+      ),
+      bottomSheet: ListTile(
+        title: Text(
+          'DPU ©',
+          style: TextStyle(
+              fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
+        tileColor: Color(0xFF800000),
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -96,7 +74,21 @@ class _Registration_FormState extends State<Registration_Form> {
               SizedBox(
                 height: 10,
               ),
-              //title of page
+              Container(
+                padding: EdgeInsets.only(top: 5, bottom: 5),
+                child: const Text(
+                  'Faculty Registration',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+              ), //title of page
+              SizedBox(
+                height: 10,
+              ),
               Form(
                 key: _formKey,
                 child: Container(
@@ -236,35 +228,6 @@ class _Registration_FormState extends State<Registration_Form> {
                       ), //namefield
 
                       Container(
-                        padding: EdgeInsets.all(5),
-                        child: DropdownButtonFormField(
-                          items: batches.map((String batch) {
-                            return DropdownMenuItem(
-                              value: batch,
-                              child: Text(batch),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              batch = newValue!;
-                            });
-                          },
-                          value: batch,
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5.0)),
-                            ),
-                            labelText: 'Select Batch',
-                            icon: Icon(
-                              Icons.perm_contact_cal_outlined,
-                              color: Colors.black,
-                            ),
-                          ),
-                        ),
-                      ),
-                      //emailfield
-                      Container(
                         padding: const EdgeInsets.all(5),
                         child: TextFormField(
                           validator: (val) => val!.length < 6
@@ -296,7 +259,7 @@ class _Registration_FormState extends State<Registration_Form> {
               ), //textfields
 
               const SizedBox(
-                height: 5,
+                height: 10,
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -311,15 +274,13 @@ class _Registration_FormState extends State<Registration_Form> {
 
                       dynamic result = await context
                           .read<AuthenticationService>()
-                          .signUp(
+                          .facultySignUp(
                               emailController.text.trim(),
                               passwordController.text.trim(),
                               nameController.text.trim(),
                               dobController.text.trim(),
                               gender,
                               branch,
-                              batch,
-                              approvedProfileStatus,
                               userType);
                       if (result == null) {
                         setState(() {
@@ -337,7 +298,7 @@ class _Registration_FormState extends State<Registration_Form> {
                                     ),
                                   ),
                                   content: const Text(
-                                    'You Are Registered to DYPIMR ALUMNI \n Happy Journey with Us !',
+                                    'New Faculty Added!',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -366,21 +327,9 @@ class _Registration_FormState extends State<Registration_Form> {
                     ),
                   )),
               SizedBox(
-                height: 5,
+                height: 10,
               ),
-              TextButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
-                  },
-                  child: const Text(
-                    'Already Registered? Click here to Sign In',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.redAccent,
-                    ),
-                  )),
+
               const SizedBox(
                 height: 10,
               ), //signinbutton

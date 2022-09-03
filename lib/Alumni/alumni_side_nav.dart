@@ -1,5 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dypimr_alumni/Alumni/Alumni_Home.dart';
+import 'package:dypimr_alumni/Alumni/company_profile.dart';
+import 'package:dypimr_alumni/Alumni/jobs.dart';
+import 'package:dypimr_alumni/Alumni/manage_profile.dart';
 import 'package:dypimr_alumni/Provider/email_Authentication.dart';
+import 'package:dypimr_alumni/Sessions/Sessions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +20,7 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   @override
   Widget build(BuildContext context) {
-    var collection = FirebaseFirestore.instance.collection('Alumni_Details');
+    var collection = FirebaseFirestore.instance.collection('Users');
     User user = FirebaseAuth.instance.currentUser!;
     String uid = user.uid;
 
@@ -44,7 +49,7 @@ class _NavBarState extends State<NavBar> {
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('lib/images/DPUlogo.png'),
-                fit: BoxFit.cover,
+                fit: BoxFit.scaleDown,
               ),
             ),
           ),
@@ -52,28 +57,40 @@ class _NavBarState extends State<NavBar> {
             leading: Icon(Icons.home),
             title: Text('Home'),
             onTap: () {
-              Navigator.pushNamed(context, '/AdminHome');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AlumniHome()));
             },
           ),
           ListTile(
             leading: Icon(Icons.manage_accounts),
-            title: Text('Manage Alumnis'),
+            title: Text('Manage Account'),
             onTap: () {
-              Navigator.pushNamed(context, '/Manage Alumnis');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ManageProfile()));
             },
           ),
           ListTile(
             leading: Icon(Icons.person_add_alt_1),
-            title: Text('Add Faculties'),
+            title: Text('Events & Sessions'),
             onTap: () {
-              Navigator.pushNamed(context, '/Add Faculties');
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Sessions()));
             },
           ),
           ListTile(
             leading: Icon(Icons.work),
-            title: Text('Jobs'),
+            title: Text('Company Profile'),
             onTap: () {
-              Navigator.pushNamed(context, '/Jobs Page');
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CompanyProfile()));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.work),
+            title: Text('Job Openings'),
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => JobsPage()));
             },
           ),
           ListTile(
@@ -84,6 +101,7 @@ class _NavBarState extends State<NavBar> {
                   Provider.of<AuthenticationService>(context, listen: false);
               provider.signOut();
               context.read<AuthenticationService>().signOut();
+              Navigator.pop(context);
             },
           ),
           ListTile(

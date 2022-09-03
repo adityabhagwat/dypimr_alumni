@@ -22,6 +22,10 @@ class _PTOHomeState extends State<PTOHome> {
     String approvedProfileStatus = "";
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+        backgroundColor: Color(0xFF800000),
+      ),
       body: Center(
         child: Column(
           children: [
@@ -32,6 +36,7 @@ class _PTOHomeState extends State<PTOHome> {
                       listen: false);
                   provider.signOut();
                   context.read<AuthenticationService>().signOut();
+                  Navigator.pop(context);
                 },
                 child: Text('Logout'))
           ],

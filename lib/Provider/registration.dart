@@ -14,7 +14,7 @@ class DatabaseService {
       String dob,
       String gender,
       String branch,
-      int passingYear,
+      String batch,
       String approvedProfileStatus,
       String userType) async {
     return await alumni_details_collecttion.doc(uid).set({
@@ -23,8 +23,20 @@ class DatabaseService {
       'dob': dob,
       'gender': gender,
       'branch': branch,
-      'passingYear': passingYear,
+      'batch': batch,
       'approvedProfileStatus': approvedProfileStatus,
+      'userType': userType
+    });
+  }
+
+  Future<void> updateFacultyData(String name, String email, String dob,
+      String gender, String branch, String userType) async {
+    return await alumni_details_collecttion.doc(uid).set({
+      'name': name,
+      'email': email,
+      'dob': dob,
+      'gender': gender,
+      'branch': branch,
       'userType': userType
     });
   }

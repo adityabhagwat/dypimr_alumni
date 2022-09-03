@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:dypimr_alumni/Admin/Admin_Home.dart';
-import 'package:dypimr_alumni/Admin/add_faculties.dart';
-import 'package:dypimr_alumni/Admin/manage_alumni.dart';
+import 'package:dypimr_alumni/Faculty/Faculty_Home.dart';
+import 'package:dypimr_alumni/Faculty/alumniBirthdays.dart';
+import 'package:dypimr_alumni/Faculty/alumniDetails.dart';
+import 'package:dypimr_alumni/Faculty/event_dashboard.dart';
+import 'package:dypimr_alumni/Faculty/profile.dart';
 import 'package:dypimr_alumni/Provider/email_Authentication.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -54,23 +56,39 @@ class _NavBarState extends State<NavBar> {
             title: Text('Home'),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AdminHome()));
+                  MaterialPageRoute(builder: (context) => FacultyHome()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.manage_accounts),
-            title: Text('Manage Alumnis'),
+            leading: Icon(Icons.person_pin),
+            title: Text('Alumni Details '),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ManageAlumnis()));
+                  MaterialPageRoute(builder: (context) => AlumniDetails()));
             },
           ),
           ListTile(
-            leading: Icon(Icons.person_add_alt_1),
-            title: Text('Add Faculties'),
+            leading: Icon(Icons.cake),
+            title: Text('Birthdays & Anniversaries'),
             onTap: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => AddFaculty()));
+                  MaterialPageRoute(builder: (context) => AlumniBirthdays()));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.event),
+            title: Text('Events'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => DashboardScreen()));
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.event),
+            title: Text('Profile'),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ProfileScreen()));
             },
           ),
           ListTile(

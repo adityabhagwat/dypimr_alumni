@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dypimr_alumni/Alumni/alumni_side_nav.dart';
 import 'package:dypimr_alumni/Provider/email_Authentication.dart';
+import 'package:dypimr_alumni/chats/HomeScreen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,7 +36,32 @@ class _AlumniHomeState extends State<AlumniHome> {
                 elevation: 0,
                 backgroundColor: Color(0xFF800000),
               ),
+              floatingActionButton: FloatingActionButton(
+                child: Icon(Icons.message),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
+              ),
               drawer: NavBar(),
+              body: Center(
+                  child: FutureBuilder(
+                future: FirebaseFirestore.instance.collection('chatroom').get(),
+                builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasData) {
+                    QuerySnapshot documents = snapshot.data!;
+                    List<DocumentSnapshot> docs = documents.docs;
+                    docs.forEach((data) {
+                      ListTile(
+                        title: Text(data.id),
+                      );
+                    });
+                  } else {
+                    print("nodata");
+                  }
+                  return Container();
+                },
+              )),
             );
           } else if (approvedProfileStatus == 'Not Approved Yet') {
             return Scaffold(

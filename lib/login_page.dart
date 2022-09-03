@@ -146,17 +146,15 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       setState(() => loading = true);
-
-                      dynamic result =
+                      var result =
                           await context.read<AuthenticationService>().signIn(
                                 emailController.text.trim(),
                                 passwordController.text.trim(),
                               );
                       if (result == null) {
-                        setState(() {
-                          loading = false;
-                          error = 'Could not sign in with those credentials';
-                        });
+                        Scaffold.maybeOf(context)?.showSnackBar(
+                          SnackBar(content: Text('Invalid Credentials')),
+                        );
                       }
                     }
                   },
